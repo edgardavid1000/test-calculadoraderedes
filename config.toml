@@ -1,0 +1,10 @@
+baseURL = "https://test-calculadoraderedes.netlify.app/"
+languageCode = "es-es"
+title = "Calculadora de Redes IP"
+
+[params]
+  description = "Herramienta para calcular propiedades de redes IP"
+  author = "Network Calculator Team"
+
+[build]
+  writeStats = true
