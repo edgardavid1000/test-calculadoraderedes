@@ -1,0 +1,48 @@
+{{ define "main" }}
+<div class="container">
+    <h1>{{ .Title }}</h1>
+    <div class="calculator">
+        <form id="ipForm">
+            <div class="input-group">
+                <input type="text" id="ipInput" placeholder="Ej: 192.168.1.0/24 o 255.255.255.0" required>
+                <button type="submit">Calcular</button>
+            </div>
+        </form>
+        
+        <div id="results" class="hidden">
+            <h2>Resultados:</h2>
+            <div class="result-grid">
+                <div class="result-row">
+                    <span class="label">Red:</span>
+                    <span id="network"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">Primera IP útil:</span>
+                    <span id="firstUsable"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">IP:</span>
+                    <span id="ip"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">Última IP útil:</span>
+                    <span id="lastUsable"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">Broadcast:</span>
+                    <span id="broadcast"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">Máscara:</span>
+                    <span id="mask"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="visualization" class="hidden">
+            <h2>Visualización de Red:</h2>
+            <div id="network-diagram"></div>
+        </div>
+    </div>
+</div>
+{{ end }}
