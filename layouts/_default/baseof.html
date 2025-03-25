@@ -6,7 +6,8 @@
     <title>{{ .Title }} - {{ .Site.Title }}</title>
     <meta name="description" content="{{ .Site.Params.description }}">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="stylesheet" href="/css/main.css">
+    {{ $styles := resources.Get "css/main.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
 </head>
 <body>
     {{ partial "header.html" . }}
@@ -14,6 +15,7 @@
         {{ block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . }}
-    <script src="/js/calculator.js"></script>
+    {{ $script := resources.Get "js/calculator.js" | minify | fingerprint }}
+    <script src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}"></script>
 </body>
 </html>
