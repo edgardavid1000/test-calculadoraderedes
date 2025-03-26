@@ -4,13 +4,13 @@
     <div class="calculator">
         <form id="ipForm">
             <div class="input-group">
-                <input type="text" id="ipInput" placeholder="Ej: 192.168.1.0/24 o 255.255.255.0" required>
-                <button type="submit">Calcular</button>
+                <input type="text" id="ipInput" placeholder="Ej: 192.168.1.0/24 o 255.255.255.0" required aria-label="Dirección IP o máscara">
+                <button type="submit" aria-label="Calcular detalles de red">Calcular</button>
             </div>
         </form>
         
-        <div id="results" class="hidden">
-            <h2>Resultados:</h2>
+        <div id="results" class="hidden" aria-live="polite">
+            <h2>Resultados de Red</h2>
             <div class="result-grid">
                 <div class="result-row">
                     <span class="label">Red:</span>
@@ -21,7 +21,7 @@
                     <span id="firstUsable"></span>
                 </div>
                 <div class="result-row">
-                    <span class="label">IP:</span>
+                    <span class="label">IP Proporcionada:</span>
                     <span id="ip"></span>
                 </div>
                 <div class="result-row">
@@ -29,18 +29,18 @@
                     <span id="lastUsable"></span>
                 </div>
                 <div class="result-row">
-                    <span class="label">Broadcast:</span>
+                    <span class="label">Dirección de Broadcast:</span>
                     <span id="broadcast"></span>
                 </div>
                 <div class="result-row">
-                    <span class="label">Máscara:</span>
+                    <span class="label">Máscara de Red:</span>
                     <span id="mask"></span>
                 </div>
             </div>
         </div>
         
-        <div id="visualization" class="hidden">
-            <h2>Visualización de Red:</h2>
+        <div id="visualization" class="hidden" aria-live="polite">
+            <h2>Visualización de Red</h2>
             <div id="network-diagram"></div>
         </div>
     </div>
