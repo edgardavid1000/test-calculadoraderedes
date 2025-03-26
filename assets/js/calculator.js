@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
         visualizationDiv.classList.remove('hidden');
     }
 
-    // Generar visualización de la red (sin cambios respecto al original)
+    // Generar visualización de la red (MODIFICADO para evitar overflow de texto)
     function generateVisualization(results) {
         let html = '';
         const maskValue = results.mask; // Puede ser /CIDR o IP
@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <!-- Rectángulo de host único -->
                         <rect x="200" y="50" width="200" height="50" fill="#3b82f6" stroke="#2563eb" stroke-width="2"/>
                         <text x="300" y="75" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white">Host Único</text>
-                        <text x="300" y="95" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white">${results.ip}</text>
+                        <text x="300" y="95" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white" textLength="190" lengthAdjust="spacingAndGlyphs">${results.ip}</text>
 
                         <!-- Máscara de red -->
                         <text x="300" y="130" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">Máscara: ${results.mask}</text>
@@ -375,13 +375,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         <!-- Visualización de red punto a punto -->
                         <rect x="150" y="50" width="120" height="50" fill="#3b82f6" stroke="#2563eb" stroke-width="2"/>
                         <text x="210" y="75" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white">IP 1</text>
-                        <text x="210" y="95" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white">${results.network}</text>
+                        <text x="210" y="95" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white" textLength="110" lengthAdjust="spacingAndGlyphs">${results.network}</text>
 
                         <line x1="270" y1="75" x2="330" y2="75" stroke="#0f172a" stroke-width="2" stroke-dasharray="5,5"/>
 
                         <rect x="330" y="50" width="120" height="50" fill="#3b82f6" stroke="#2563eb" stroke-width="2"/>
                         <text x="390" y="75" font-family="sans-serif" font-size="14" text-anchor="middle" fill="white">IP 2</text>
-                        <text x="390" y="95" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white">${results.broadcast}</text>
+                        <text x="390" y="95" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white" textLength="110" lengthAdjust="spacingAndGlyphs">${results.broadcast}</text>
 
                         <!-- Máscara de red -->
                         <text x="300" y="130" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">Máscara: ${results.mask} (Punto a Punto)</text>
@@ -390,6 +390,8 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (cidr >= 0 && cidr <= 30) {
                  // Caso general
                  const numHosts = Math.pow(2, 32 - cidr) - 2;
+                 // Define text length slightly smaller than the box width (100)
+                 const ipTextLength = "90";
                  html = `
                     <svg width="100%" height="100%" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
                         <!-- Rectángulo de red -->
@@ -398,18 +400,18 @@ document.addEventListener('DOMContentLoaded', function() {
                         <!-- Dirección de red -->
                         <rect x="60" y="30" width="100" height="40" fill="#3b82f6" stroke="#2563eb" stroke-width="1"/>
                         <text x="110" y="50" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white">Red</text>
-                        <text x="110" y="65" font-family="sans-serif" font-size="10" text-anchor="middle" fill="white">${results.network}</text>
+                        <text x="110" y="65" font-family="sans-serif" font-size="10" text-anchor="middle" fill="white" textLength="${ipTextLength}" lengthAdjust="spacingAndGlyphs">${results.network}</text>
 
                         <!-- Primera IP útil -->
                         <rect x="170" y="30" width="100" height="40" fill="#60a5fa" stroke="#2563eb" stroke-width="1"/>
                         <text x="220" y="50" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white">Primera IP</text>
-                        <text x="220" y="65" font-family="sans-serif" font-size="10" text-anchor="middle" fill="white">${results.firstUsable}</text>
+                        <text x="220" y="65" font-family="sans-serif" font-size="10" text-anchor="middle" fill="white" textLength="${ipTextLength}" lengthAdjust="spacingAndGlyphs">${results.firstUsable}</text>
 
                         <!-- IP indicada (si aplica) -->
                         ${results.ip !== 'N/A' && results.ip !== 'No aplica' ? `
                         <rect x="280" y="30" width="100" height="40" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
                         <text x="330" y="50" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white">IP Dada</text>
-                        <text x="330" y="65" font-family="sans-serif" font-size="10" text-anchor="middle" fill="white">${results.ip}</text>
+                        <text x="330" y="65" font-family="sans-serif" font-size="10" text-anchor="middle" fill="white" textLength="${ipTextLength}" lengthAdjust="spacingAndGlyphs">${results.ip}</text>
                         ` : `
                         <text x="330" y="55" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#6b7280">(IP no aplicable)</text>
                         `}
@@ -418,12 +420,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         <!-- Última IP útil -->
                         <rect x="390" y="30" width="100" height="40" fill="#60a5fa" stroke="#2563eb" stroke-width="1"/>
                         <text x="440" y="50" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white">Última IP</text>
-                        <text x="440" y="65" font-family="sans-serif" font-size="10" text-anchor="middle" fill="white">${results.lastUsable}</text>
+                        <text x="440" y="65" font-family="sans-serif" font-size="10" text-anchor="middle" fill="white" textLength="${ipTextLength}" lengthAdjust="spacingAndGlyphs">${results.lastUsable}</text>
 
                         <!-- Broadcast -->
                         <rect x="280" y="80" width="100" height="40" fill="#3b82f6" stroke="#2563eb" stroke-width="1"/>
                         <text x="330" y="100" font-family="sans-serif" font-size="12" text-anchor="middle" fill="white">Broadcast</text>
-                        <text x="330" y="115" font-family="sans-serif" font-size="10" text-anchor="middle" fill="white">${results.broadcast}</text>
+                        <text x="330" y="115" font-family="sans-serif" font-size="10" text-anchor="middle" fill="white" textLength="${ipTextLength}" lengthAdjust="spacingAndGlyphs">${results.broadcast}</text>
 
                         <!-- Máscara de red -->
                         <text x="110" y="105" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">Máscara: ${results.mask}</text>
