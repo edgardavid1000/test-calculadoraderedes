@@ -1,7 +1,3 @@
----
-File: /assets/js/calculator.js
----
-
 document.addEventListener('DOMContentLoaded', function() {
     const ipForm = document.getElementById('ipForm');
     const ipInput = document.getElementById('ipInput');
