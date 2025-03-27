@@ -1,13 +1,16 @@
 /* Reset y variables */
 :root {
-  --primary-color: #2c5282;
-  --primary-dark: #1a365d;
-  --text-color: #1a202c;
-  --bg-color: #f7fafc;
-  --bg-secondary: #edf2f7;
-  --border-color: #cbd5e0;
-  --success-color: #38a169;
-  --error-color: #e53e3e;
+  --primary-color: #2c5282; /* Dark Blue */
+  --primary-dark: #1a365d; /* Very Dark Blue */
+  --text-color: #1a202c; /* Very Dark Gray/Almost Black */
+  --text-muted-color: #4a5568; /* Darker Gray for better contrast (was #718096) */
+  --bg-color: #f7fafc; /* Very Light Gray/Almost White */
+  --bg-secondary: #edf2f7; /* Light Gray */
+  --bg-hover-color: #e2e8f0; /* Slightly darker gray for hover (was rgba(45, 55, 72, 0.05)) */
+  --border-color: #cbd5e0; /* Medium Gray - Keep for subtle separators like header/footer */
+  --border-strong-color: #a0aec0; /* Stronger Gray for UI elements (New Variable) */
+  --success-color: #38a169; /* Green */
+  --error-color: #e53e3e; /* Red */
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
@@ -37,15 +40,15 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   padding: 1rem 0;
   margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color); /* Use subtle border */
 }
 
 footer {
   margin-top: 3rem;
   padding: 1.5rem 0;
   text-align: center;
-  border-top: 1px solid var(--border-color);
-  color: #718096;
+  border-top: 1px solid var(--border-color); /* Use subtle border */
+  color: var(--text-muted-color); /* Use darker gray for better contrast */
   background-color: #f7fafc;
 }
 
@@ -79,7 +82,7 @@ nav {
   box-shadow: var(--card-shadow);
   padding: 2.5rem;
   margin-top: 2rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-strong-color); /* Use stronger border */
 }
 
 h1 {
@@ -106,7 +109,7 @@ h2 {
 input[type="text"] {
   flex: 1;
   padding: 1rem 1.25rem;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--border-strong-color); /* Use stronger border */
   border-right: none;
   border-radius: 8px 0 0 8px;
   font-size: 1rem;
@@ -115,7 +118,7 @@ input[type="text"] {
 
 input[type="text"]:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: var(--primary-color); /* Focus remains high contrast */
 }
 
 button {
@@ -142,20 +145,20 @@ button:hover {
   background-color: var(--bg-secondary);
   border-radius: 8px;
   padding: 2rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-strong-color); /* Use stronger border */
 }
 
 .result-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-strong-color); /* Use stronger border */
   padding: 0.75rem 0;
   transition: background-color 0.3s ease;
 }
 
 .result-row:hover {
-  background-color: rgba(45, 55, 72, 0.05);
+  background-color: var(--bg-hover-color); /* Use more distinct hover color */
 }
 
 .result-row:last-child {
@@ -171,7 +174,7 @@ button:hover {
 #network-diagram {
   height: 250px;
   margin-top: 1.5rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-strong-color); /* Use stronger border */
   border-radius: 8px;
   padding: 1.5rem;
   background-color: white;
@@ -188,12 +191,13 @@ button:hover {
   .input-group {
     flex-direction: column;
   }
-  
+
   input[type="text"] {
     border-radius: 8px;
     margin-bottom: 1rem;
+    border-right: 2px solid var(--border-strong-color); /* Add right border back on mobile */
   }
-  
+
   button {
     border-radius: 8px;
     width: 100%;
